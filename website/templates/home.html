@@ -1,0 +1,93 @@
+
+#home
+
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<style>
+  .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.748);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  button {
+      margin-top: 10px;
+      padding: 10px;
+      cursor: pointer;
+  }
+  .bookings {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+  }
+</style>
+
+<div class="container">
+{% if user.id %}
+  <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+    <div style="text-transform: uppercase; font-family: 'Times New Roman', Times, serif; color: #000000;">
+      <strong>HELLO {{ user.username }} &#58;&rpar;</strong>
+    </div>
+  </div>
+{% endif %}
+
+<form method="POST" action="{{ url_for('views.book') }}">
+    <label for="bookingDate">Select Date:</label>
+    <input type="date" id="bookingDate" name="bookingDate" required>
+
+    <label for="startTime">Select Start Time:</label>
+    <input type="time" id="startTime" name="startTime" required>
+
+    <label for="endInterval">Select Duration:</label>
+    <select id="endInterval" name="endInterval" required>
+        <option value="5">5 minutes</option>
+        <option value="10">10 minutes</option>
+        <option value="15">15 minutes</option>
+    </select>
+
+    <button type="submit">Book Now</button>
+</form>
+
+<div class="bookingewds1">
+    <h2>Your Bookings</h2>
+    <ul>
+        {% for booking in bookings %}
+            <li>{{ booking.start_time }} - {{ booking.end_time }}</li>
+        {% else %}
+            <li>No bookings found.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+  // Set minimum date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bookingDate').setAttribute('min', today);
+
+  // Function to set minimum time based on current time
+  function setMinTime() {
+      const dateInput = document.getElementById('bookingDate');
+      const startTimeInput = document.getElementById('startTime');
+
+      const now = new Date();
+      if (dateInput.value === today) {
+          const hours = now.getHours().toString().padStart(2, '0');
+          const minutes = now.getMinutes().toString().padStart(2, '0');
+          startTimeInput.setAttribute('min', `${hours}:${minutes}`);
+      } else {
+          startTimeInput.removeAttribute('min'); // No minimum for future dates
+      }
+  }
+
+  // Event listener for date change
+  document.getElementById('bookingDate').addEventListener('change', setMinTime);
+
+  // Initialize minimum time when the page loads
+  setMinTime();
+</script>
+{% endblock %}

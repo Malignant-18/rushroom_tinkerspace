@@ -1,0 +1,45 @@
+
+#login 
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+  %}
+  <!-- <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-image: url('https://gratisography.com/wp-content/uploads/2023/06/gratisography-boxing-boxer-free-stock-photo-800x525.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;"> -->
+
+    <form method="POST" style="
+    background: rgba(255, 255, 255, 0.748); 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    width: 90%; 
+    max-width: 400px;
+    margin: 0 auto;">
+        <h3 style="text-align: center; margin-bottom: 20px;">Login</h3>
+        <div style="margin-bottom: 15px;">
+          <label for="email" style="display: block; margin-bottom: 5px;">Email Address</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ced4da;"
+          />
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter Password"
+            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ced4da;"
+          />
+        </div>
+        <div style="text-align: center;">
+          <button class="btn btn-primary" type="submit" style="background-color: #007bff; border: none; padding: 10px 20px; border-radius: 4px; color: white; cursor: pointer;">Login</button>
+        </div>
+    </form>
+  
+  </body>
+  {% endblock %}
+
